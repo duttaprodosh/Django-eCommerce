@@ -13,8 +13,27 @@ def cart_summary(request):
     cart_products = cart.get_prods
     quantities = cart.get_quants
     totals = cart.cart_total()
+
+# Begin - Calculating Cart Product and quantity wise totol price
+    prod_totals = {}
+    prod_val = cart.get_prods_dict()
+    prod_qty =cart.get_quants_dict()
+
+    for i in range(len(prod_val)):
+        for key, value in prod_qty.items():
+    # Convert key string into into so we can do math
+            key = int(key)
+            if key == prod_val[i]['id']:
+                if prod_val[i]['is_sale']:
+                    price=prod_val[i]['sale_price']
+                else:
+                    price = prod_val[i]['price']
+                prod_totals[str(key)] = float(value * price)
+
+    # End - Calculating Cart Product and quantity wise totol price
+
     return render(request, "cart_summary.html",
-                  {"cart_products": cart_products, "quantities": quantities, "totals": totals})
+                  {"cart_products": cart_products, "quantities": quantities, "totals": totals, "prod_totals":prod_totals})
 
 
 def cart_add(request):

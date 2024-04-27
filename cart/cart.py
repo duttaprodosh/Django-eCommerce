@@ -94,9 +94,22 @@ class Cart():
         # Return those looked up products
         return products
 
+    def get_prods_dict(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids).values()
+        return products
+
     def get_quants(self):
         quantities = self.cart
         return quantities
+
+    def get_quants_dict(self):
+        qty=self.cart
+        quants_dict = {}
+        for key, value in qty.items():
+            quants_dict[key] = value
+        return quants_dict
+
 
     def update(self, product, quantity):
         product_id = str(product)

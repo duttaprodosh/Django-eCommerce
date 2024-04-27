@@ -5,7 +5,7 @@
 {% block content %}
 
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-7">
             <div class="container px-1 px-lg-2 my-2">
                 <div class="text-center text-white">
                     <h2 class="display-7 fw-bolder">Shopping Cart</h2>
@@ -27,7 +27,7 @@
       <div class="card-body">
         <center>
         <h5 class="card-title">{{ product.name }}</h5>
-        <br/>
+
         <p class="card-text justified">{{ product.description }}</p>
 
         {% if product.is_sale %}
@@ -49,7 +49,7 @@
         {% endif %}
             <br/><br/>
         <div class="row justify-content-center">
-    <div class="col-md-2">Quantity:</div>
+            <div class="col-md-2">Quantity:</div>
                 <div class="col-md-2">
                 <select class="form-select form-select-sm" id="select{{product.id}}">
 
@@ -68,13 +68,21 @@
                 </select>
                 </div>
             </div>
-            <br/><br/>
+            <br/>
+            Product Wise Total :
+                {% for key, value in prod_totals.items %}
+                    {% if key == product.id|slugify %}
+                       <img src="../static/assets/Rupee_Sign.ico" width="20" height="18"> {{ value }}
+                    {% endif %}
+                {% endfor %}
+
+             <br/> <br/>
         <a href="{% url 'home'%}" class="btn btn-secondary">Home</a>
         <button type="button" data-index="{{product.id}}" class="btn btn-primary update-cart">Update</button>
         <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button>
 
-    </center>
-      </div>
+         </center>
+        </div>
     </div>
   </div>
 </div>
@@ -83,7 +91,7 @@
 
         	{% endfor %}
             <div align="right">
-            <h3>Total: Rs.{{ totals }}</h3>
+            <h3>Total: <img src="../static/assets/Rupee_Sign.ico" width="20" height="24">{{ totals }}</h3>
             <a href="#!" class="btn btn-success">Checkout</a>
 
             </div>

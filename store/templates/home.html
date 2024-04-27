@@ -4,10 +4,10 @@
 {% block content %}
 
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-6">
             <div class="container px-1 px-lg-2 my-2">
                 <div class="text-center text-white">
-                    <h2 class="display-7 fw-bolder">Shop in style</h2>
+                    <h3 class="display-6 fw-bolder">Shop in style</h3>
                     <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
                 </div>
             </div>
@@ -43,10 +43,10 @@
 
                                     <!-- Product price-->
                                     <strike>
-                                    ${{ product.price }}
+                                    <img src="../static/assets/Rupee_Sign.ico" width="20" height="18">{{ product.price }}
                                     </strike>
                                     &nbsp;
-                                    ${{ product.sale_price }}
+                                    {{ product.sale_price }}
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -70,7 +70,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ product.name }}</h5>
                                     <!-- Product price-->
-                                    ${{ product.price }}
+                                    <img src="../static/assets/Rupee_Sign.ico" width="20" height="18">{{ product.price }}
                                 </div>
                             </div>
                             <!-- Product actions-->

@@ -67,22 +67,14 @@ def cart_delete(request):
     if request.POST.get('action') == 'post':
         # Get stuff
         product_id = int(request.POST.get('product_id'))
-        product_qty = int(request.POST.get('product_qty'))
+        # Call delete Function in Cart
+        cart.delete(product=product_id)
 
-        # lookup product in DB
-        product = get_object_or_404(Product, id=product_id)
-
-        # Save to session
-        cart.add(product=product, quantity=product_qty)
-
-        # Get Cart Quantity
-        cart_quantity = cart.__len__()
-
-        # Return resonse
-        response = JsonResponse({'Product Name: ': product.name})
-        response = JsonResponse({'qty': cart_quantity})
-        messages.success(request, ("Product Added To Cart..."))
+        response = JsonResponse({'product': product_id})
+        # return redirect('cart_summary')
+        messages.success(request, ("Product Deleted From Shopping Cart..."))
         return response
+
 
 def cart_update(request):
     cart = Cart(request)

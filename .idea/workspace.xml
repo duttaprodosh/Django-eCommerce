@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/store/templates/update_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/update_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/update_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/templates/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
     </list>

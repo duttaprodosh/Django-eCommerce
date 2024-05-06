@@ -5,10 +5,10 @@
 {% block content %}
 
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-7">
             <div class="container px-1 px-lg-2 my-2">
                 <div class="text-center text-white">
-                    <h2 class="display-7 fw-bolder">Shopping Cart</h2>
+                    <h3 class="display-7 fw-bolder">Shopping Cart</h3>
                     <p class="lead fw-normal text-white-50 mb-0">View Your Cart...</p>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <br/>
-            Product Wise Total :
+            Item Wise Total :
                 {% for key, value in prod_totals.items %}
                     {% if key == product.id|slugify %}
                        <img src="../static/assets/Rupee_Sign.ico" width="20" height="18"> {{ value }}
@@ -91,8 +91,8 @@
 
         	{% endfor %}
             <div align="right">
-            <h3>Total: <img src="../static/assets/Rupee_Sign.ico" width="20" height="24">{{ totals }}</h3>
-            <a href="#!" class="btn btn-success">Checkout</a>
+            <h3>Total : <img src="../static/assets/Rupee_Sign.ico" width="20" height="24">{{ totals }} </h3>
+            <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
 
             </div>
             <br/><br/><br/>

@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/payment/templates/payment/checkout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/templates/cart_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/cart/templates/cart_summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/templates/payment/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +35,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../django_CRM" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -91,15 +87,30 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="137" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1713592145489">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1713592145489" />
-    <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1713628313014">
+    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1715153334480">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1713628313014" />
+    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1715153334480" />
+    <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1715153032798">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1715153032798" />
     <state width="1344" height="167" key="GridCell.Tab.0.bottom" timestamp="1713767727840">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -116,9 +127,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1344" height="167" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1713767727840" />
-    <state x="186" y="0" key="SettingsEditor" timestamp="1713610882346">
+    <state x="186" y="0" key="SettingsEditor" timestamp="1715148387760">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="186" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1713610882346" />
+    <state x="186" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1715148387760" />
   </component>
 </project>

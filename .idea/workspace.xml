@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/payment/templates/payment/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +34,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunManager">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -90,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715153374931</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Cart Checkout - Form as Table">
+      <created>1715153530677</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715153530677</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -98,7 +105,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -106,17 +115,18 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cart Checkout - form_p" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cart Checkout - form_p" />
+    <MESSAGE value="Cart Checkout - Form as Table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cart Checkout - Form as Table" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1713592145489">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1713592145489" />
-    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1715153373021">
+    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1715153529559">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1715153373021" />
+    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1715153529559" />
     <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1715153032798">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -137,13 +147,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1344" height="167" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1713767727840" />
-    <state x="186" y="0" key="SettingsEditor" timestamp="1715148387760">
+    <state x="186" y="0" key="SettingsEditor" timestamp="1715172014307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="186" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1715148387760" />
-    <state x="275" y="99" key="Vcs.Push.Dialog.v2" timestamp="1715153503137">
+    <state x="186" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1715172014307" />
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2" timestamp="1715153548811">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1715153503137" />
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1715153548811" />
   </component>
 </project>

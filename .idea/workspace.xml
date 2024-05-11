@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/payment/templates/payment/billing_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/templates/payment/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +37,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Django-eCommerce" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunManager">
@@ -97,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715153530677</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Cart Checkout - Form as Table">
+      <created>1715172093387</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715172093387</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -123,14 +134,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="137" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1713592145489" />
-    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1715153529559">
+    <state x="305" y="0" key="CommitChangelistDialog2" timestamp="1715172092514">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1715153529559" />
-    <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1715153032798">
+    <state x="305" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1715172092514" />
+    <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1715175482308">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1715153032798" />
+    <state x="463" y="121" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1715175482308" />
     <state width="1344" height="167" key="GridCell.Tab.0.bottom" timestamp="1713767727840">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -151,9 +162,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="186" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1715172014307" />
-    <state x="275" y="99" key="Vcs.Push.Dialog.v2" timestamp="1715153548811">
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2" timestamp="1715173993846">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1715153548811" />
+    <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1715173993846" />
   </component>
 </project>

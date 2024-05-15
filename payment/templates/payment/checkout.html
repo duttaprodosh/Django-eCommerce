@@ -62,7 +62,7 @@
       <form method="POST" action="{% url 'billing_info' %}">
         {% csrf_token %}
        {{ shipping_form.as_table }}
-        <button type="submit" class="btn btn-secondary">
+        <button type="submit" class="btn btn-primary">
            Continue To Billing
         </button>
       </form>

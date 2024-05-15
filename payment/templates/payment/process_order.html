@@ -8,8 +8,8 @@
         <header class="bg-dark py-7">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h3 class="display-6 fw-bolder"><strong>Billing Info </strong></h3>
-                    <p class="lead fw-normal text-white-50 mb-0">Enter Your Payment Info...</p>
+                    <h3 class="display-6 fw-bolder">Processing Order...</h3>
+                    <p class="lead fw-normal text-white-50 mb-0">This is temporary</p>
                 </div>
             </div>
         </header>
@@ -19,8 +19,8 @@
 
                     <div class="col-md-6 offset-md-3">
           <div class="card">
-          <div class="card-header"> <strong>
-            Order Summary </strong>
+          <div class="card-header">
+            Order Summary
           </div>
           <div class="card-body">
             {% for product in cart_products %}
@@ -48,8 +48,8 @@
         </div>
 <br/><br/>
 <div class="card">
-  <div class="card-header"> <strong>
-    Shipping Info </strong>
+  <div class="card-header">
+    Shipping Info
   </div>
   <div class="card-body">
 
@@ -69,24 +69,24 @@
 <br/><br/>
 
 <div class="card">
-  <div class="card-header"> <strong>
-    Billing Info </strong>
+  <div class="card-header">
+    Billing Info
   </div>
   <div class="card-body">
     <form method="POST" action="{% url 'process_order' %}">
       {% csrf_token %}
-        {{ billing_form.as_p }}
-        <button type="submit" class="btn btn-primary">
-            Pay Now
-        </button>
-    </form>
+    {{ billing_form.as_p }}
+
   </div>
 </div>
 <br/>
 
 
 
-
+<button type="submit" class="btn btn-primary">
+  Pay Now
+</button>
+</form>
 <br/><br/>
 
 

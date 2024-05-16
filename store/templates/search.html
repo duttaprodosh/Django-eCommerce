@@ -3,8 +3,8 @@
 {% block content %}
 
 <!-- Header-->
-        <header class="bg-dark py-7">
-            <div class="container px-4 px-lg-5 my-5">
+        <header class="bg-dark py-6">
+            <div class="container px-1 px-lg-2 my-2">
                 <div class="text-center text-white">
                     <h3 class="display-6s fw-bolder">Search Products</h3>
                     <p class="lead fw-normal text-white-50 mb-0">Find What You're Looking For...</p>
@@ -16,19 +16,19 @@
         	<div class="row">
         		<center>
         			<div class="col-10">
-        				<br/><br/>
+
 <div class="card">
   <div class="card-header">
-    Search Products
+    <strong>Search Products </strong>
   </div>
   <div class="card-body">
     <form method="POST" action="{% url 'search' %}">
         {% csrf_token %}
         <div class="mb-3">
 
-          <input type="text" class="form-control" placeholder="Search For Products" name="searched">
+          <input type="text" class="form-control" placeholder="Search For Products" name="searched" value="{{searchvalue}}">
         </div>
-    <button type="submit" class="btn btn-secondary">
+    <button type="submit" class="btn btn-outline-primary">
         Search Products
     </button>
     </form>
@@ -62,10 +62,10 @@
 
                                     <!-- Product price-->
                                     <strike>
-                                    ${{ product.price }}
+                                    <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ product.price }}
                                     </strike>
                                     &nbsp;
-                                    ${{ product.sale_price }}
+                                    <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ product.sale_price }}
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -89,7 +89,7 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ product.name }}</h5>
                                     <!-- Product price-->
-                                    ${{ product.price }}
+                                    <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ product.price }}
                                 </div>
                             </div>
                             <!-- Product actions-->

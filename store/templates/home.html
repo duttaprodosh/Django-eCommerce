@@ -12,6 +12,25 @@
                 </div>
             </div>
         </header>
+<div class="card">
+
+<!--  <div class="card-header">
+    Search Products
+  </div>  -->
+  <div class="card-body">
+    <form method="POST" action="{% url 'search' %}">
+        {% csrf_token %}
+        <div class="mb-2">
+
+          <input type="text" class="form-control" placeholder="Search For Products by Product Name/Product Description or by Category" name="searched" required value="{{searchvalue}}" >
+        </div>
+    <button type="submit" class="btn btn-outline-primary">
+        Search Products
+    </button>
+    </form>
+  </div>
+</div>
+
         <!-- Section-->
         <section class="py-5">
 

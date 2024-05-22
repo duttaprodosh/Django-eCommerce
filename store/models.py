@@ -87,7 +87,42 @@ class Order(models.Model):
     def __str__(self):
         return self.product
 
+class Department(models.Model):
+    department_name = models.CharField(max_length=100)
 
+    def __str__(self)->str:
+        return self.department_name
+
+    class Meta:
+        ordering =['department_name']
+
+class StudentID(models.Model):
+    student_id = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.student_id
+
+class StudentManger(models.Manager):
+    def get_queryset(self):
+       return super().get_queryset().filter(is_deleted=False)
+
+class Student(models.Model):
+    department = models.ForeignKey(Department, related_name="department", on_delete=models.CASCADE)
+    student_id = models.OneToOneField(StudentID, related_name="studentid", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    age   = models.IntegerField(default=18)
+    address = models.TextField()
+    is_deleted = models.BooleanField(default=False)
+
+    objects = models.Manager()  # The default manager.
+    admin_objects = StudentManger()  # The StudentManger -specific manager.
+
+    def __str__(self) ->str:
+        return self.name
+    class Meta:
+        ordering = ['name']
+        verbose_name = "student"
 
 def category(request, foo):
 # Replace Hyphens with Spaces
@@ -101,4 +136,5 @@ def category(request, foo):
     except:
         messages.success(request, ("That Category Doesn't Exist..."))
         return redirect('home')
+
 

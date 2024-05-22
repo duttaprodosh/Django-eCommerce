@@ -13,6 +13,7 @@ from django import forms
 from django.db.models import Q
 import json
 from cart.cart import Cart
+from .utils import send_mail_to_client
 
 def search(request):
 
@@ -179,4 +180,6 @@ def update_password(request):
         messages.success(request, "You Must Be Logged In To View That Page...")
         return redirect('home')
 
-
+def send_mail_to_customer(request):
+    send_mail_to_client()
+    return redirect('home')

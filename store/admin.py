@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Customer, Product, Order, Profile
+from .models import Category, Customer, Product, Order, Profile, StudentID, Student, Department
 from django.contrib.auth.models import User
 
 
@@ -9,6 +9,10 @@ admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(Profile)
+
+admin.site.register(StudentID)
+admin.site.register(Student)
+admin.site.register(Department)
 
 
 # Mix profile info and user info

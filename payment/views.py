@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from store.models import Product, Profile
 
+from store.utils import send_mail_to_client
+
+
 def payment_success(request):
 	return render(request, "payment/payment_success.html", {})
 
@@ -152,6 +155,7 @@ def process_order(request):
 			current_user.update(old_cart=None)
 
 			messages.success(request, "Order Placed!")
+			send_mail_to_client(user, full_name, email, shipping_address, amount_paid)
 			return redirect('home')
 
 
@@ -193,6 +197,7 @@ def process_order(request):
 					del request.session[key]
 
 			messages.success(request, "Order Placed!")
+			send_mail_to_client(None, full_name, email, shipping_address, amount_paid)
 			return redirect('home')
 
 

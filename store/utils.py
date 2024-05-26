@@ -2,8 +2,10 @@ from .models import Student
 import time
 from django.core.mail import send_mail
 from django.conf import settings
+import socket
 
-def send_mail_to_client(user, full_name, email, shipping_address, amount_paid):
+def send_mail_to_client(user, full_name, email, phone, shipping_address, amount_paid,html_content):
+    socket.getaddrinfo('127.0.0.1', 8000)
     subject = 'Mail from Python djangoECommerce application.'
     message = "Hi "+full_name+", "+"""
     \n\tHow Are you ? Thanks for shopping in the Django EComm site.
@@ -12,7 +14,8 @@ def send_mail_to_client(user, full_name, email, shipping_address, amount_paid):
     """
     from_email = settings.EMAIL_HOST_USER
     sender_email_id_password=settings.EMAIL_HOST_PASSWORD
-    recipient_list = ['duttaprodosh@gmail.com']
+    #recipient_list = ['duttaprodosh@gmail.com']
+    recipient_list = list(email.split(" "))
     file_path = f"{settings.BASE_DIR}/main.xlsx"
 
     #import smtplib
@@ -21,8 +24,9 @@ def send_mail_to_client(user, full_name, email, shipping_address, amount_paid):
 
     from django.core.mail import EmailMessage
 
-    em = EmailMessage(subject=subject, body=message, from_email=from_email, to = recipient_list, cc=None, bcc=None, reply_to=None)
-
+#    em = EmailMessage(subject=subject, body=message, from_email=from_email, to = recipient_list, cc=None, bcc=None, reply_to=None)
+    em = EmailMessage(subject=subject, body=html_content, from_email=from_email, to = recipient_list, cc=None, bcc=None, reply_to=None)
+    em.content_subtype="html"
 #######   Earlier Method of Sending mail using Python Library not Django mail package  #########
 #    em['From'] = from_email
 #    em['To']   = recipient_list
@@ -38,8 +42,15 @@ def send_mail_to_client(user, full_name, email, shipping_address, amount_paid):
 
 ######   Sending email using django library package    #########################################
 #    em.attach_file(file_path)    ###  if you want to attach a file "main.xlsx"
-    em.send()
-
+    try :
+        em.send()
+    except Exception as e:
+        print("Exception Raised (Not able to send Html content in the email. :"+str(e))
+        em.content_subtype = "text"
+        try :
+            em.send()
+        except Exception as e:
+            print("Exception Raised (Not able to send Text email. :" + str(e))
 
     # creates SMTP session
     #s = smtplib.SMTP('smtp.gmail.com', 587)

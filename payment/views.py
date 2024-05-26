@@ -7,7 +7,7 @@ from django.contrib import messages
 from store.models import Product, Profile
 
 from store.utils import send_mail_to_client
-
+from datetime import datetime
 
 def payment_success(request):
 	return render(request, "payment/payment_success.html", {})
@@ -63,6 +63,7 @@ def billing_info(request):
 		quantities = cart.get_quants
 		totals = cart.cart_total()
 
+
 		# Create a session with Shipping Info
 		my_shipping = request.POST
 		request.session['my_shipping'] = my_shipping
@@ -91,6 +92,8 @@ def billing_info(request):
 		messages.success(request, "Access Denied")
 		return redirect('home')
 
+from django.template.loader import get_template
+import random
 
 def process_order(request):
 	if request.POST:
@@ -99,6 +102,24 @@ def process_order(request):
 		cart_products = cart.get_prods
 		quantities = cart.get_quants
 		totals = cart.cart_total()
+		# Begin - Calculating Cart Product and quantity wise totol price
+		prod_totals = {}
+		prod_val = cart.get_prods_dict()
+		prod_qty = cart.get_quants_dict()
+
+		for i in range(len(prod_val)):
+			for key, value in prod_qty.items():
+				# Convert key string into into so we can do math
+				key = int(key)
+				if key == prod_val[i]['id']:
+					if prod_val[i]['is_sale']:
+						price = prod_val[i]['sale_price']
+					else:
+						price = prod_val[i]['price']
+					prod_totals[str(key)] = float(value * price)
+
+		# End - Calculating Cart Product and quantity wise totol price
+
 
 		# Get Billing Info from the last page
 		payment_form = PaymentForm(request.POST or None)
@@ -108,9 +129,15 @@ def process_order(request):
 		# Gather Order Info
 		full_name = my_shipping['shipping_full_name']
 		email = my_shipping['shipping_email']
+		phone = my_shipping['shipping_phone']
 		# Create Shipping Address from session info
 		shipping_address = f"{my_shipping['shipping_address1']}\n{my_shipping['shipping_address2']}\n{my_shipping['shipping_city']}\n{my_shipping['shipping_state']}\n{my_shipping['shipping_zipcode']}\n{my_shipping['shipping_country']}"
 		amount_paid = totals
+
+		invoice_head = ['A', 'B', 'D', 'M', 'N', 'Q']
+		invoice_tail = random.randint(3223, 99999)
+		invoice_no = random.choice(invoice_head) + str(invoice_tail)
+		invoice_date = datetime.now()
 
 		# Create an Order
 		if request.user.is_authenticated:
@@ -118,7 +145,7 @@ def process_order(request):
 			user = request.user
 			# Create Order
 			create_order = Order(user=user, full_name=full_name, email=email, shipping_address=shipping_address,
-								 amount_paid=amount_paid)
+								 amount_paid=amount_paid, invoice_no=invoice_no, invoice_date=invoice_date)
 			create_order.save()
 
 			# Add order items
@@ -154,17 +181,33 @@ def process_order(request):
 			current_user = Profile.objects.filter(user__id=request.user.id)
 			current_user.update(old_cart=None)
 
-			messages.success(request, "Order Placed!")
-			send_mail_to_client(user, full_name, email, shipping_address, amount_paid)
-			return redirect('home')
+			order_no = str(order_id)
+			invoice_date=str(invoice_date.strftime("%d-%b-%Y %H:%M:%S"))
+
+			html_content = get_template('payment/orderemail.html').render(
+				{'full_name': full_name, 'shipping_address': shipping_address, 'email': email,
+				 'phone': phone, 'invoice_no': invoice_no, 'invoice_date':invoice_date,'order_no': order_no,
+				 'cart_products': cart_products, 'quantities': quantities, 'totals': totals,
+				 'prod_totals': prod_totals})
+
+			messages.success(request, "Order Placed! Invoice sent to your registered mail id.")
+
+			send_mail_to_client(user, full_name, email, phone, shipping_address, amount_paid, html_content)
+			return render(request, "payment/orderemail.html",
+						  {'full_name': full_name, 'shipping_address': shipping_address, 'email': email, 'phone': phone,
+						   'invoice_no': invoice_no,'invoice_date':invoice_date,
+						   'order_no': order_no, 'cart_products': cart_products, 'quantities': quantities,
+						   'totals': totals, 'prod_totals': prod_totals})
+			#return redirect('home')
 
 
 
 		else:
 			# not logged in
 			# Create Order
+
 			create_order = Order(full_name=full_name, email=email, shipping_address=shipping_address,
-								 amount_paid=amount_paid)
+								 amount_paid=amount_paid, invoice_no=invoice_no, invoice_date=invoice_date)
 			create_order.save()
 
 			# Add order items
@@ -196,9 +239,22 @@ def process_order(request):
 					# Delete the key
 					del request.session[key]
 
-			messages.success(request, "Order Placed!")
-			send_mail_to_client(None, full_name, email, shipping_address, amount_paid)
-			return redirect('home')
+			order_no=str(order_id)
+			invoice_date = str(invoice_date.strftime("%d-%b-%Y %H:%M:%S"))
+
+			html_content = get_template('payment/orderemail.html').render(
+				{'full_name': full_name, 'shipping_address': shipping_address, 'email': email,
+				 'phone': phone, 'invoice_no':invoice_no, 'invoice_date':invoice_date, 'order_no':order_no,
+				 'cart_products': cart_products, 'quantities': quantities, 'totals': totals,
+				 'prod_totals': prod_totals})
+
+			messages.success(request, "Order Placed! Invoice sent to your registered mail id.")
+
+			send_mail_to_client(None, full_name, email, phone, shipping_address, amount_paid,html_content)
+			return render(request, "payment/orderemail.html",
+					  {'full_name':full_name, 'shipping_address':shipping_address, 'email':email,'phone':phone, 'invoice_no':invoice_no, 'invoice_date':invoice_date,
+					   'order_no':order_no,'cart_products':cart_products, 'quantities':quantities, 'totals':totals, 'prod_totals':prod_totals})
+			#return redirect('home')
 
 
 	else:

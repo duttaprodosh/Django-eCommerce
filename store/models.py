@@ -3,6 +3,7 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -29,6 +30,7 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile = Profile(user=instance)
         user_profile.save()
 
+# There are four signals - pre_save, post_save, pre_delete, post_delete
 # Automate the profile thing
 post_save.connect(create_profile, sender=User)
 
@@ -124,6 +126,21 @@ class Student(models.Model):
         ordering = ['name']
         verbose_name = "student"
 
+################   django Signals ###################################
+class Car(models.Model):
+    car_name = models.CharField(max_length=200)
+    speed    = models.IntegerField(default=50)
+
+    def __str__(self):
+        return f"{self.car_name}"
+
+#  As soon as Car Object created it will call car_speed_api
+@receiver(post_save, sender=Car)
+def car_spped_api(sender, instance, **kwargs):
+    print("CAR OBJECT CREATED")
+    print(sender, instance, kwargs)
+################   django Signals ###################################
+
 def category(request, foo):
 # Replace Hyphens with Spaces
     foo = foo.replace('-', ' ')
@@ -136,5 +153,8 @@ def category(request, foo):
     except:
         messages.success(request, ("That Category Doesn't Exist..."))
         return redirect('home')
+
+
+
 
 

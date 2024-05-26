@@ -11,6 +11,7 @@ class ShippingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     shipping_full_name = models.CharField(max_length=255)
     shipping_email = models.CharField(max_length=255)
+    shipping_phone = models.CharField(max_length=255, null=True, blank=True)
     shipping_address1 = models.CharField(max_length=255)
     shipping_address2 = models.CharField(max_length=255, null=True, blank=True)
     shipping_city = models.CharField(max_length=255)
@@ -48,6 +49,8 @@ class Order(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
     shipped = models.BooleanField(default=False)
     date_shipped = models.DateTimeField(blank=True, null=True)
+    invoice_no   = models.CharField(max_length=250, default=None,  null=True)
+    invoice_date  = models.DateTimeField(default=None,  null=True)
 
     def __str__(self):
         return f'Order - {str(self.id)}'

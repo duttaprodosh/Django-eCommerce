@@ -17,41 +17,41 @@
         <div class="container">
             <div class="row">
 
-                    <div class="col-md-6 offset-md-3">
-          <div class="card">
-          <div class="card-header">
-            <strong>Order Summary </strong>
-          </div>
-          <div class="card-body">
-            {% for product in cart_products %}
-                {{ product.name }} :
+               <div class="col-md-6 offset-md-3">
+                  <div class="card">
+                    <div class="card-header">
+                        <strong>Order Summary </strong>
+                    </div>
+                    <div class="card-body">
+                    {% for product in cart_products %}
+                    {{ product.name }} :
                     {% if product.is_sale %}
                         <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ product.sale_price }}
                     {% else %}
                         <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ product.price }}
-                {% endif %}
+                    {% endif %}
 
-                <br/>
-                <small>Quantity :
-                {% for key, value in quantities.items %}
+                    <br/>
+                    <small>Quantity :
+                    {% for key, value in quantities.items %}
                     {% if key == product.id|slugify %}
                         {{ value }}
                     {% endif %}
-                {% endfor %}</small>
-                <br/>
-                 Item Wise Total :
-                 {% for key, value in prod_totals.items %}
+                    {% endfor %}</small>
+                    <br/>
+                    Item Wise Total :
+                    {% for key, value in prod_totals.items %}
                     {% if key == product.id|slugify %}
                        <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ value }}
                     {% endif %}
                     {% endfor %}
-                <br/> <br/>
+                    <br/> <br/>
 
-            {% endfor %}
+                    {% endfor %}
             <strong>Total :  <img src="../static/assets/Rupee_Sign.ico" width="13" height="16">{{ totals }}</strong>
             <br/><br/>
             <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-primary"><strong>Update Items</strong></a>
-          </div>
+                    </div>
         </div>
 <br/><br/>
 <div class="card">

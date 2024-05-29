@@ -7,13 +7,25 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UserInfoForm, UpdateUserForm, ChangePasswordForm
 
 from payment.forms import ShippingForm
-from payment.models import ShippingAddress
+
 
 from django import forms
-from django.db.models import Q
+from django.db.models import Q, F
 import json
 from cart.cart import Cart
 from .utils import send_mail_to_client
+from payment.models import Order,OrderItem, ShippingAddress2
+from django.contrib.auth.models import User
+
+
+def orders(request):
+    current_user = request.user.id
+
+    shipment = ShippingAddress2.objects.get(user__id =current_user)
+    orders = Order.objects.filter(user__id =current_user ).annotate(ship_date=F('date_shipped'))
+    order_lines = OrderItem.objects.filter(user__id =current_user).annotate(linetotal=F('quantity') * F('price'))
+
+    return render(request, "orders.html", {'shipment':shipment,'orders':orders, 'order_lines':order_lines })
 
 def search(request):
 
@@ -37,7 +49,7 @@ def update_info(request):
         # Get Current User
         current_user = Profile.objects.get(user__id=request.user.id)
         # Get Current User's Shipping Info
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
+        shipping_user = ShippingAddress2.objects.get(user__id=request.user.id)
 
         # Get original User Form
         form = UserInfoForm(request.POST or None, instance=current_user)
@@ -74,6 +86,7 @@ def login_user(request):
 
             # Do some shopping cart stuff
             current_user = Profile.objects.get(user__id=request.user.id)
+
             # Get their saved cart from database
             saved_cart = current_user.old_cart
             # Convert database string to python dictionary
@@ -101,6 +114,7 @@ def logout_user(request):
     return redirect('home')
 
 def register_user(request):
+    messages.success(request, ("Please input UserName or Mobil No to Register."))
     form = SignUpForm()
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -126,13 +140,35 @@ def product(request,pk):
 
 def category(request, foo):
     # Replace Hyphens with Spaces
+
+
     foo = foo.replace('-', ' ')
     # Grab the category from the url
     try:
     # Look Up The Category
-        category = Category.objects.get(name=foo)
-        products = Product.objects.filter(category=category)
-        return render(request, 'category.html', {'products':products, 'category':category})
+        if foo == 'Deals':
+            products = Product.objects.filter(is_sale = True)
+            category= 'Deals of the Day'
+            foo = 'Deals of the Day'
+            print(products[0].name)
+        else :
+            category = Category.objects.filter(Q(name__icontains=foo))
+            products = Product.objects.filter(Q(name__icontains=foo) | Q(description__icontains=foo) | Q(category__in=category))
+
+        #category = Category.objects.get(name=foo)
+        #products = Product.objects.filter(category=category)
+        if foo == 'phone':
+            foo = 'Mobile Phones'
+        if foo == 'book':
+            foo = 'All Books'
+        if foo == 'phone':
+            foo = 'All Mobile Phones'
+        if foo == 'programming books':
+            foo = 'Programming Books'
+        if foo == 'marketing books':
+            foo = 'Marketing Books'
+
+        return render(request, 'category.html', {'products':products, 'category':category, 'input_category':foo})
     except:
         messages.success(request, ("That Category Doesn't Exist..."))
         return redirect('home')

@@ -2,11 +2,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+    .container1 {
+  width:800px
+
+}
+</style>
 <!-- Header-->
-        <header class="bg-dark py-7">
-            <div class="container px-4 px-lg-5 my-5">
+        <header class="container1 bg-dark py-7">
+            <div class="container1 px-2 px-lg-2 my-2">
                 <div class="text-center text-white">
-                    <h3 class="display-6 fw-bolder">Update Info</h3>
+                    <h3 class="display-7 fw-bolder">Update Info</h3>
                     <p class="lead fw-normal text-white-50 mb-0">Update User Info...</p>
                 </div>
             </div>
@@ -14,41 +20,24 @@
 
         <div class="container">
         	<div class="row">
-
-        			<div class="col-md-6 offset-md-3">
-
-        				<br/><br/>
+       			<div class="col-md-6 offset-md-0">
                     <strong>Billing Information</strong>
-                    <br/><br/>
-<form method="POST" action="{% url 'update_info' %}">
-    {% csrf_token %}
+                    <br/>
+                    <form method="POST" action="{% url 'update_info' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-    {{ form.as_p }}
-    <br/><br/>
-    <strong>Shipping Information</strong>
-    <br/><br/>
-
-    {{ shipping_form.as_p }}
-
-    <br/><br/>
-    <button type="submit" class="btn btn-secondary">
-      Update Profile
-    </button>
-</form>
-
-<br/><br/>
-
-
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-<br/><br/>
-        			</div>
-
-        	</div>
-        </div>
+                        <strong>Shipping Information</strong>
+                        <br/>
+                    {{ shipping_form.as_p }}
+                    <br/>
+                        <button type="submit" class="btn btn-outline-primary">
+                        Update Profile
+                        </button>
+                    </form>
+                    <br/>
+ 			</div>
+       	</div>
+    </div>
 
 {% endblock %}

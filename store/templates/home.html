@@ -2,39 +2,25 @@
 
 
 {% block content %}
-
+<style>
+    .container1 {
+  width:1100px
+}
+</style>
         <!-- Header-->
-        <header class="bg-dark py-6">
-            <div class="container px-1 px-lg-2 my-2">
+        <header class="container1 bg-dark py-7">
+            <div class="container1 px-2 px-lg-2 my-2">
                 <div class="text-center text-white">
-                    <h3 class="display-6 fw-bolder">Shop in style</h3>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                    <h3 class="display-7 fw-bolder">Shop in style</h3>
+                    <p class="lead fw-normal text-white-50 mb-0"> Online Shopping. </p>
                 </div>
             </div>
         </header>
-<div class="card">
-
-<!--  <div class="card-header">
-    Search Products
-  </div>  -->
-  <div class="card-body">
-    <form method="POST" action="{% url 'search' %}">
-        {% csrf_token %}
-        <div class="mb-2">
-
-          <input type="text" class="form-control" placeholder="Search For Products by Product Name/Product Description or by Category" name="searched" required value="{{searchvalue}}" >
-        </div>
-    <button type="submit" class="btn btn-outline-primary">
-        Search Products
-    </button>
-    </form>
-  </div>
-</div>
 
         <!-- Section-->
-        <section class="py-5">
+        <section class="py-7">
 
-            <div class="container px-4 px-lg-5 mt-5">
+            <div class="container1 px-2 px-lg-5 mt-2 offset-md-0">
 
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 

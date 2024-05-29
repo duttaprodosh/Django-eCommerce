@@ -2,17 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/payment/templates/payment/orderemail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/payment/templates/payment/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/invoice_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/templates/orders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/templates/sidenavbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/templates/cart_summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/cart/templates/cart_summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/templates/payment/billing_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/billing_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/templates/payment/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/templates/payment/orderemail.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/orderemail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/payment/templates/payment/process_order.html" beforeDir="false" afterPath="$PROJECT_DIR$/payment/templates/payment/process_order.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/payment/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,10 +233,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="99" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1715173993846" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1716377354721">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1716806233325">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1716377354721" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1716806233325" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

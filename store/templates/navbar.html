@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'home' %}">Ecommerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -22,13 +23,13 @@
 
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logoout</a></li>
                      {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'register' %}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'login' %}">Login</a></li>
                      {% endif %}
 
-                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'about' %}">About</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                            <a class="nav-link  active  dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{% url 'category_summary' %}">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
@@ -38,9 +39,16 @@
                         </li>
                        <!-- <li class="nav-item"><a class="nav-link" href="{% url 'send_mail_to_customer' %}">Send Mail</a></li> -->
                     </ul>
+                    <form class="d-flex" role="search" method="POST" action="{% url 'search' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-1" type="text" placeholder="Search For Products by Product Name/Product Description or by Category"
+                               name="searched" required value="{{searchvalue}}">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <form class="d-flex">
                         <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-                            <i class="bi-cart-fill me-1"></i>
+                            <i class="bi bi-cart4 me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart_quantity">{{  cart|length }}</span>
                         </a>
@@ -53,3 +61,9 @@
                 </div>
             </div>
         </nav>
+<script>
+    document.querySelector('input').addEventListener('input', function(){
+        document.querySelector('.box').scrollLeft = this.value;
+    })
+
+</script>

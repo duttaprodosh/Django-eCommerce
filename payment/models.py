@@ -7,7 +7,9 @@ import datetime
 
 
 
-class ShippingAddress(models.Model):
+class ShippingAddress2(models.Model):
+    shipping_id = models.AutoField(primary_key=True)
+    id          = models.IntegerField(default=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     shipping_full_name = models.CharField(max_length=255)
     shipping_email = models.CharField(max_length=255)
@@ -21,16 +23,16 @@ class ShippingAddress(models.Model):
 
     # Don't pluralize address
     class Meta:
-        verbose_name_plural = "Shipping Address"
+        verbose_name_plural = "Shipping Address2"
 
     def __str__(self):
-        return f'Shipping Address - {str(self.id)}'
+        return f"ShippinAddress - {str(self.id)}"
 
 
 # Create a user Shipping Address by default when user signs up
 def create_shipping(sender, instance, created, **kwargs):
     if created:
-        user_shipping = ShippingAddress(user=instance)
+        user_shipping = ShippingAddress2(user=instance)
         user_shipping.save()
 
 

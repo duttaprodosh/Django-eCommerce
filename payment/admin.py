@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import ShippingAddress, Order, OrderItem
+from .models import ShippingAddress2, Order, OrderItem
 from django.contrib.auth.models import User
 
 
 # Register the model on the admin section thing
-admin.site.register(ShippingAddress)
+#admin.site.register(ShippingAddress)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 
@@ -22,6 +22,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 # Unregister Order Model
 admin.site.unregister(Order)
-
+#admin.site.unregister(ShippingAddress2)
 # Re-Register our Order AND OrderAdmin
 admin.site.register(Order, OrderAdmin)
+admin.site.register(ShippingAddress2)

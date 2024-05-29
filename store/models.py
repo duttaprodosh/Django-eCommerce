@@ -156,5 +156,14 @@ def category(request, foo):
 
 
 
+class Authors(models.Model):
+    author_name = models.CharField(max_length=200)
 
+class Books(models.Model):
+    book_id = models.AutoField(primary_key=True)
+    book_name = models.CharField(max_length=200)
+    publisher    = models.CharField(max_length=200)
+    author = models.ForeignKey(Authors, related_name="authors", on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.book_name}"

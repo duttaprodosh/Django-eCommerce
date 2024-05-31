@@ -3,7 +3,7 @@ from .models import Product, Category, Profile, Order, Customer
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import SignUpForm, UserInfoForm, UpdateUserForm, ChangePasswordForm
 
 from payment.forms import ShippingForm
@@ -106,7 +106,53 @@ def login_user(request):
             messages.success(request, ("There was an error, please try again..."))
             return redirect('login')
     else :
+        #form = AuthenticationForm()
         return render(request, 'login.html', {})
+
+def modalsignup(request):
+        return render(request, 'modalsignup.html')
+
+def register_sidemenu(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            login(request, form.save())
+            messages.success(request, ("Username Created - Please Fill Out Your User Info Below..."))
+            return redirect('update_info')
+    else:
+        form = UserCreationForm()
+    return render(request, "register_sidemenu.html", { "form": form })
+
+
+def login_sidemenu(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            print(form.get_user())
+            login(request, form.get_user())
+            if form.get_user() is not None:
+                # Do some shopping cart stuff
+                current_user = Profile.objects.get(user__id=request.user.id)
+
+                # Get their saved cart from database
+                saved_cart = current_user.old_cart
+                # Convert database string to python dictionary
+                if saved_cart:
+                    # Convert to dictionary using JSON
+                    converted_cart = json.loads(saved_cart)
+                    # Add the loaded cart dictionary to our session
+                    # Get the cart
+                    cart = Cart(request)
+                    # Loop thru the cart and add the items from the database
+                    for key, value in converted_cart.items():
+                        cart.db_add(product=key, quantity=value)
+
+                messages.success(request, ("You Have Been Logged In!"))
+
+            return redirect("home")
+    else:
+        form = AuthenticationForm()
+    return render(request, "login_sidemenu.html", { "form": form })
 
 def logout_user(request):
     logout(request)
@@ -114,9 +160,10 @@ def logout_user(request):
     return redirect('home')
 
 def register_user(request):
-    messages.success(request, ("Please input UserName or Mobil No to Register."))
+    messages.success(request, ("Please input UserName or Mobile No to Register."))
     form = SignUpForm()
     if request.method == "POST":
+        #form = UserCreationForm(request.POST)
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -130,7 +177,10 @@ def register_user(request):
         else:
             messages.success(request, ("Whoops! There was a problem Registering, please try again..."))
             return redirect('register')
+            #form = UserCreationForm()
+
     else:
+        # form = UserCreationForm()
         return render(request, 'register.html', {'form': form})
 
 

@@ -39,6 +39,12 @@ def create_shipping(sender, instance, created, **kwargs):
 # Automate the profile thing
 post_save.connect(create_shipping, sender=User)
 
+@receiver(pre_save, sender=ShippingAddress2)
+def set_id_on_update(sender, instance, **kwargs):
+	if instance.pk:
+		obj = sender._default_manager.get(pk=instance.pk)
+		if obj.id == 1:
+			instance.id = obj.shipping_id
 
 # Create Order Model
 class Order(models.Model):

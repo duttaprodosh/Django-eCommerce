@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
 {% block content %}
+<style>
+    .container1 {
+  width:800px
+}
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	min-height:600px;
+	max-height:1200px;
+	position:relative;
+	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:10px 5px 15px 20px;
+	background:rgba(40,57,101,.9);
+	overflow-y:scroll;
+}
+</style>
 <!-- Header-->
-        <header class="bg-dark py-7">
-            <div class="container px-1 px-lg-2 my-2">
+        <header class="container1 bg-dark py-7">
+            <div class="container1 px-2 px-lg-2 my-2">
                 <div class="text-center text-white">
                     <h3 class="display-6 fw-bolder">Register</h3><p id="blink">Use your preferable User Name or Mobile No. to Register.</p>
                     <p class="lead fw-normal text-white-50 mb-0"></p>
@@ -21,13 +44,15 @@
     </script>
         </header>
 
-        <div class="container">
+ <div class="container1 offset-md-0" align="left">
+            <div class="login-wrap">
+        	<div class="login-html">
         	<div class="row">
-        		<div class="col-md-6 offset-md-3">
+        		<div class="col-md-6 offset-md-0">
    				<br/><br/>
                  <form method="POST" action="{% url 'register' %}">
                      {% csrf_token %}
-                     {{ form.as_p }}
+                     <strong>{{ form.as_p }} </strong>
                      <br/>
                      <button type="submit" class="btn btn-secondary">Register </button>
                  </form>
@@ -36,5 +61,6 @@
       			</div>
         	</div>
         </div>
-
-{% endblock %}
+   </div>
+ </div>
+     {% endblock %}

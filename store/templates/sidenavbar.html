@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 
@@ -30,13 +31,9 @@
                             <i class="bi bi-file-lock"></i> <span class="ms-1 d-none d-sm-inline">Login</span>
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="{% url 'modalsignup' %}" class="nav-link align-middle px-0">
-                            <i class="bi bi-file-lock"></i> <span class="ms-1 d-none d-sm-inline">Login - Modal</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'register_sidemenu' %}" class="nav-link align-middle px-0">
+                        <a href="{% url 'register' %}" class="nav-link align-middle px-0">
                             <i class="bi bi-file-person"></i> <span class="ms-1 d-none d-sm-inline">Register</span>
                         </a>
                     </li>
@@ -82,8 +79,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#">All Products</a></li>
                                     <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="{% url 'category' 'programming-books'%}">Fridge</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'category' 'marketing-books'%}">A/C Machine</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'category' ' '%}">Fridge</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'category' ' '%}">A/C Machine</a></li>
                                 </ul>
                             </li><br/>
                         </ul>
@@ -95,20 +92,20 @@
                         <a href="{% url 'orders'  %}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
                     </li>
-                    {% endif %}
+
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Report Generation</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Invoice - Orders</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">User information</span></a>
                             </li>
                         </ul>
                     </li>
-
+                    {% endif %}
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>

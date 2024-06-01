@@ -36,33 +36,40 @@
 			<div class="sign-up-htm">
 				<form method="POST" action="{% url 'register_sidemenu' %}">
                      {% csrf_token %}
-                     {{ form.as_p }}
-                     <br/>
-                     <button type="submit" class="btn btn-outline-primary">Register </button>
-                 </form>
-<!--				<div class="group">
+
+				<div class="group">
 					<label for="user" class="label">Username</label>
-					<input id="user" type="text" class="input">
+					<input id="username" name="username" type="text" class="input">
 				</div>
 				<div class="group">
-					<label for="pass" class="label">Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<label for="first_name" class="label">First Name</label>
+					<input id="first_name" name="first_name" type="text" class="input">
 				</div>
 				<div class="group">
-					<label for="pass" class="label">Repeat Password</label>
-					<input id="pass" type="password" class="input" data-type="password">
+					<label for="last_name" class="label">Last Name</label>
+					<input id="last_name" name="last_name" type="text" class="input">
 				</div>
 				<div class="group">
-					<label for="pass" class="label">Email Address</label>
-					<input id="pass" type="text" class="input">
+					<label for="email" class="label">Email Address</label>
+					<input id="email" name="email" type="text" class="input">
 				</div>
+				<div class="group">
+					<label for="password1" class="label">Password</label>
+					<input id="password1" name="password1" type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<label for="password2" class="label">Repeat Password</label>
+					<input id="password2" name="password2" type="password" class="input" data-type="password">
+				</div>
+
 				<div class="group">
 					<input type="submit" class="button" value="Sign Up">
 				</div>
+			</form>
 				<div class="hr"></div>
 				<div class="foot-lnk">
 					<label for="tab-1">Already Member?</label>
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>

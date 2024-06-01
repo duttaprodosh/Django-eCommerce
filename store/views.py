@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import SignUpForm, UserInfoForm, UpdateUserForm, ChangePasswordForm
-
+from django.http import JsonResponse, HttpResponse
 from payment.forms import ShippingForm
 
 
@@ -113,22 +113,37 @@ def modalsignup(request):
         return render(request, 'modalsignup.html')
 
 def register_sidemenu(request):
+    messages.success(request, ("Please input Correct UserName or Mobile No to Register."))
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+
+    #    first_name = request.POST.get('first_name')
+    #    last_name = request.POST.get('last_name')
+    #    username   = request.POST.get('username')
+    #    password1  = request.POST.get('password1')
+    #    password2  = request.POST.get('password2')
+    #    email = request.POST.get('email')
+    #    form = SignUpForm(username=username, first_name=first_name, last_name=last_name, email=email, password1=password1, password2=password2)
+        form = SignUpForm(request.POST)
         if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            # log in user
+            user = authenticate(username=username, password=password)
             login(request, form.save())
             messages.success(request, ("Username Created - Please Fill Out Your User Info Below..."))
             return redirect('update_info')
+        else:
+            messages.success(request, ("Woops! User Already Exists or Incorrect User Data to Register..."))
     else:
-        form = UserCreationForm()
-    return render(request, "register_sidemenu.html", { "form": form })
+        form = SignUpForm()
+    return render(request, "modalsignup.html", { "form": form })
 
 
 def login_sidemenu(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            print(form.get_user())
             login(request, form.get_user())
             if form.get_user() is not None:
                 # Do some shopping cart stuff
@@ -150,9 +165,13 @@ def login_sidemenu(request):
                 messages.success(request, ("You Have Been Logged In!"))
 
             return redirect("home")
+        else:
+            messages.success(request, ("Woops! Incorrect User Name / Password."))
     else:
         form = AuthenticationForm()
-    return render(request, "login_sidemenu.html", { "form": form })
+
+
+    return render(request, "modalsignup.html", { "form": form })
 
 def logout_user(request):
     logout(request)

@@ -7,6 +7,25 @@
   width:800px
 
 }
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	min-height:600px;
+	max-height:1200px;
+	position:relative;
+	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:10px 5px 15px 20px;
+	background:rgba(40,57,101,.9);
+	overflow-y:scroll;
+}
 </style>
 <!-- Header-->
         <header class="container1 bg-dark py-7">
@@ -18,16 +37,18 @@
             </div>
         </header>
 
-        <div class="container">
-        	<div class="row">
+        <div class="container1 offset-md-0" align="left">
+            <div class="login-wrap">
+        	<div class="login-html">
+            <div class="row">
        			<div class="col-md-6 offset-md-0">
-                    <strong>Billing Information</strong>
+                    <strong><li style="color:White">Billing Information</li></strong>
                     <br/>
                     <form method="POST" action="{% url 'update_info' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
 
-                        <strong>Shipping Information</strong>
+                        <strong><li style="color:White">Shipping Information</li></strong>
                         <br/>
                     {{ shipping_form.as_p }}
                     <br/>
@@ -39,5 +60,6 @@
  			</div>
        	</div>
     </div>
-
+ </div>
+</div>
 {% endblock %}

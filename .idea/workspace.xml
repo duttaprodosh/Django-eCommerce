@@ -2,19 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9819603-093e-409e-acf1-3cf0a1943617" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/store/templates/login_sidemenu.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/modalsignup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/password_reset.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/password_reset_complete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/password_reset_confirm.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/password_reset_done.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/templates/register_sidemenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payment/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/payment/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login_styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/modal_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/modal_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/modalsignup.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/modalsignup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/templates/sidenavbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/sidenavbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/templates/update_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/store/templates/update_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

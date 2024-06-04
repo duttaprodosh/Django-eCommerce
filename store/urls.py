@@ -18,10 +18,13 @@ urlpatterns = [
     path('update_password/', views.update_password, name='update_password'),
     path('update_user/', views.update_user, name='update_user'),
     path('update_info/', views.update_info, name='update_info'),
+    path('update_user_info/<str:update_token>', views.update_user_info, name='update_user_info'),
     path('product/<int:pk>', views.product, name='product'),
     path('category/<str:foo>', views.category, name='category'),
     path('category_summary/', views.category_summary, name='category_summary'),
     path('search/', views.search, name='search'),
     path('send_mail_to_customer/', views.send_mail_to_customer, name='send_mail_to_customer'),
     path('orders/', views.orders, name='orders'),
+    path('invoice/<str:full_name>/<str:shipping_address>/<str:email>/<str:phone>/<str:invoice_no>/<str:invoice_date>/<str:order_no>/<str:totals>', views.invoice, name='invoice'),
+    #path('invoice/<str:invoice_no>', views.invoice, name='invoice'),
 ]

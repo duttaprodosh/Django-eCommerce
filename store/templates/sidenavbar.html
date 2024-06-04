@@ -70,7 +70,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{% url 'category' 'phone' %}">All Mobile Phones</a></li>
                                     <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#">Mobile Phone Ear Plug</a></li>
+                                    <li><a class="dropdown-item" href="#">Ear Phone</a></li>
                                     <li><a class="dropdown-item" href="#">Mobile Phone BackCover</a></li>
                                 </ul>
                             </li><br/>
@@ -90,7 +90,7 @@
                     {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'orders'  %}" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">User Orders</span></a>
                     </li>
 
                     <li>
@@ -98,10 +98,10 @@
                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Report Generation</span></a>
                         <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Invoice - Orders</span></a>
+                                <a href="{% url 'orders' %}" class="nav-link px-0"> <span class="d-none d-sm-inline">Invoice - Orders</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">User information</span></a>
+                                <a href="{% url 'update_user_info' '  ' %}" class="nav-link px-0"> <span class="d-none d-sm-inline">User information</span></a>
                             </li>
                         </ul>
                     </li>

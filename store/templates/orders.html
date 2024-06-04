@@ -145,11 +145,14 @@ h2 a {
     </thead>
 
         {% for order in orders %}
+
         {% for orderline in order_lines %}
         {% if orderline.order_id == order.id %}
 
+        {% with full_name=shipment.shipping_full_name  shipping_address=order.shipping_address email=shipment.shipping_email phone=shipment.shipping_phone invoice_no=order.invoice_no  invoice_date=order.inv_date order_no=order.id totals=order.amount_paid  %}
+
       <tr>
-        <td class="lalign" width="8%">{{ order.invoice_no}}</td>
+          <td class="lalign" width="8%"><a href="{% url 'invoice' full_name shipping_address email phone invoice_no invoice_date order_no totals %}">{{ order.invoice_no}}</a></td>
         <td align="left" width="8%">{{ order.id}}</td>
         <td width="35%">{{ order.shipping_address}}</td>
         <td width="25%">{{ orderline.product}}</td>
@@ -165,6 +168,7 @@ h2 a {
           {% endif %}
 
        </tr>
+         {% endwith %}
          {% endif %}
         {% endfor %}
        <th colspan=9 align="right"height="20px">&nbsp;Total Invoice Amount : Rs.{{ order.amount_paid }} </th>

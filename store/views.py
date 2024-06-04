@@ -7,8 +7,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import SignUpForm, UserInfoForm, UpdateUserForm, ChangePasswordForm
 from django.http import JsonResponse, HttpResponse
 from payment.forms import ShippingForm
-
-
+from store.utils import send_mail_to_client
+from django.template.loader import get_template
 from django import forms
 from django.db.models import Q, F
 import json
@@ -22,10 +22,37 @@ def orders(request):
     current_user = request.user.id
 
     shipment = ShippingAddress2.objects.get(user__id =current_user)
-    orders = Order.objects.filter(user__id =current_user ).annotate(ship_date=F('date_shipped'))
+    orders = Order.objects.filter(user__id =current_user ).annotate(ship_date=F('date_shipped'), inv_date=F('invoice_date'))
     order_lines = OrderItem.objects.filter(user__id =current_user).annotate(linetotal=F('quantity') * F('price'))
 
     return render(request, "orders.html", {'shipment':shipment,'orders':orders, 'order_lines':order_lines })
+
+def invoice(request, full_name, shipping_address, email, phone, invoice_no, invoice_date, order_no, totals):
+    current_user = request.user.id
+
+    quantities = {}
+    prod_totals = {}
+    order_lines = OrderItem.objects.filter(user__id=current_user).filter(order__id=order_no).annotate(linetotal=F('quantity') * F('price'))
+    product_ids = []
+    for lines in order_lines:
+        product_ids.append(lines.product.pk)
+
+    products = Product.objects.filter(id__in=product_ids)
+    for line in order_lines:
+        quantities[str(line.product.id)]=line.quantity
+        prod_totals[str(line.product.id)]=line.linetotal
+    html_content = get_template('payment/orderemail.html').render(
+                {'full_name': full_name, 'shipping_address': shipping_address, 'email': email, 'phone': phone,
+                'invoice_no': invoice_no, 'invoice_date': invoice_date,
+                'order_no': order_no, 'cart_products': products, 'quantities': quantities, 'totals': totals,
+                'prod_totals': prod_totals})
+    #send_mail_to_client(None, full_name, email, phone, shipping_address, totals, html_content)
+    return render(request, "payment/orderemail.html",
+                  {'full_name': full_name, 'shipping_address': shipping_address, 'email': email, 'phone': phone,
+                   'invoice_no': invoice_no, 'invoice_date': invoice_date,
+                   'order_no': order_no, 'cart_products': products, 'quantities':quantities, 'totals': totals, 'prod_totals': prod_totals  })
+  #  , 'cart_products': None, 'quantities': None,
+  #                 'totals': None, 'prod_totals': None})
 
 def search(request):
 
@@ -43,6 +70,49 @@ def search(request):
             return render(request, "home.html", {'products':products,'searchvalue':request.POST['searched']})
     else:
         return render(request, "search.html", {})
+
+def update_user_info(request, update_token):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        usr_form = UpdateUserForm(request.POST or None, instance=current_user)
+        profile = Profile.objects.get(user__id=request.user.id)
+        shipment = ShippingAddress2.objects.get(user__id=request.user.id)
+        form = UserInfoForm(request.POST or None, instance=profile)
+        shipping_form = ShippingForm(request.POST or None, instance=shipment)
+        if (request.method=='POST'):
+            if update_token=='user':
+                if usr_form.is_valid():
+                    usr_form.save()
+                    messages.success(request, "Your User Info Has Been Updated!!")
+                else :
+                    messages.success(request, "Your User Info Has Not Been Updated!!"+json.dumps(usr_form.errors.as_data()))
+            if update_token == 'profile':
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, "Your Profile Info Has Been Updated!!")
+                else :
+                    messages.success(request, "Your Profile Info Has Not Been Updated!!"+json.dumps(form.errors.as_data()))
+            if update_token == 'shipping':
+                if shipping_form.is_valid():
+                    shipping_form.save()
+                    messages.success(request, "Your Shipment Info Has Been Updated!!")
+                else :
+                    messages.success(request, "Your Shipment Info Has Not Been Updated!!"+json.dumps(shipping_form.errors.as_data()))
+            #if form.is_valid()  or shipping_form.is_valid():
+            #    # Save original form
+            #    form.save()
+                # Save shipping form
+            #    shipping_form.save()
+            current_user = User.objects.get(id=request.user.id)
+            profile = Profile.objects.get(user__id=request.user.id)
+            shipment = ShippingAddress2.objects.get(user__id=request.user.id)
+
+            return render(request, "user_information.html", {'user':current_user, 'profile':profile, 'shipment':shipment})
+        else :
+            return render(request, "user_information.html", {'profile':profile, 'shipment':shipment})
+    else:
+        messages.success(request, "You Must Be Logged In To Access That Page!!")
+        return redirect('home')
 
 def update_info(request):
     if request.user.is_authenticated:

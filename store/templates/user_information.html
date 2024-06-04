@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+  <style>
+  @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1em;
+  color:#C0C0C0;
+  background-color:#CCCCFF;
+ }
+
+h1 {
+  font-size:3em;
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #4DC3FA;
+}
+
+h2 {
+  font-size:1em;
+  font-weight: 300;
+  text-align: center;
+  display: block;
+  line-height:1em;
+  padding-bottom: 0.1em;
+  color: #FB667A;
+}
+
+h2 a {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FB667A;
+  text-decoration: none;
+}
+
+.blue { color: #185875; }
+.yellow { color: #FFF842; }
+
+
+.container-fluid1 h1 {
+	  font-weight: bold;
+	  font-size: 1em;
+  text-align: left;
+  color: #185875;
+
+}
+
+.container-fluid1 {
+  width:1100px;
+ }
+.container1 {
+  width:1100px
+
+}
+
+input {
+border: 1px solid black;
+  overflow: visible;
+ }
+</style>
+
+<header class="container1 bg-dark py-7">
+            <div class="container1  px-1 px-lg-2 my-2">
+                <div class="text-center text-white">
+                    <h4 class="display-7 fw-bolder">
+                     User Details - Login, Profile, Billing & Shipping Info.
+                </h4>
+                    <p class="lead fw-normal text-white-50 mb-0">  </p>
+                </div>
+            </div>
+</header>
+<div class="container-fluid1 text-black my-1" style="border: solid black 1px;">
+    {% with update_token='user' %}
+    <form method="POST" action="{% url 'update_user_info' update_token %}">
+        {% csrf_token %}
+        <h6> <strong>&nbsp;<p>&nbsp;&nbsp; User Name :
+     <input title="User Name is not Editable." onkeydown="return false" type="text" id="username" name="username" value="{{ user.username}}" placeholder="Enter Your User name" size="20">&nbsp;&nbsp;
+      First Name :
+     <input type="text" id="first_name" name="first_name" value="{{ user.first_name}}" placeholder="Enter Your First name" size="30">
+     &nbsp;Last Name :
+     <input type="text" id="last_name" name="last_name" value="{{ user.last_name}}" placeholder="Enter Your Last name" size="30">
+     <br>&nbsp;&nbsp;&nbsp;User Email :
+     <input type="text"  id="email" name="email" value="{{ user.email}}" placeholder="Enter Your Email name" size="50"></br>
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">Update User Login Info</button>
+        </p> </strong> </h6>
+    </form>
+    {% endwith  %}
+    {% with update_token='profile' %}
+    <form method="POST" action="{% url 'update_user_info' update_token %}">
+        {% csrf_token %}
+       <hr> &nbsp;<h6><strong>&nbsp;
+       User Profile Phone :
+       <input type="text" id="phone" name="phone" value="{{ profile.phone}}" placeholder="Enter Your Profile Phone No." size="12"> &nbsp;&nbsp;
+       Billing Address :
+       <input type="text" id="address1" name="address1" value="{{ profile.address1}}" placeholder="Enter Your Address Line 1." size="35"> &nbsp;&nbsp;
+       &nbsp;
+       <input type="text" id="address2" name="address2" value="{{ profile.address2}}" placeholder="Enter Your Address Line 2." size="35"> &nbsp;&nbsp;
+    &nbsp;  <br>&nbsp;&nbsp;&nbsp;City :
+       <input type="text" id="city" name="city" value="{{ profile.city}}" placeholder="Enter Your City." size="20"> &nbsp;&nbsp;
+       State :
+       <input type="text" id="state" name="state" value="{{ profile.state}}" placeholder="Enter Your State." size="10"> &nbsp;&nbsp;
+         &nbsp
+        Zipcode :
+        <input type="text" id="zipcode" name="zipcode" value="{{ profile.zipcode}}" placeholder="Enter Your Zip." size="10"> &nbsp;&nbsp;
+        Country :
+        <input type="text" id="country" name="country" value="{{ profile.country}}" placeholder="Enter Your Country." size="20"> &nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">Update Profile/Billing Info</button>
+        </strong></h6>
+    </form>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% endwith  %}
+    {% with update_token='shipping' %}
+        <form method="POST" action="{% url 'update_user_info' update_token %}">
+        {% csrf_token %}
+        <hr><h6><strong>&nbsp; Shipping Name :
+        <input type="text" id="shipping_full_name" name="shipping_full_name" value="{{ shipment.shipping_full_name}}" placeholder="Enter Shipping Full name." size="25"> &nbsp;&nbsp;
+        Shipping Email : &nbsp; &nbsp;
+        <input type="text" id="shipping_email" name="shipping_email" value="{{ shipment.shipping_email}}" placeholder="Enter Shipping Email." size="25"> &nbsp;&nbsp;
+        Contact No. :
+        <input type="text" id="shipping_phone" name="shipping_phone" value="{{ shipment.shipping_phone}}" placeholder="Enter Shipping Phone." size="20"> &nbsp;&nbsp;
+            </br> </br>
+       &nbsp;&nbsp;Shipping Address :
+        <input type="text" id="shipping_address1" name="shipping_address1" value="{{ shipment.shipping_address1}}" placeholder="Enter Shipping Address Line 1." size="45">
+        {% if shipment.shipping_address2 != None %} &nbsp;&nbsp;
+        <input type="text" id="shipping_address2" name="shipping_address2" value="{{ shipment.shipping_address2}}" placeholder="Enter Shipping Address Line 2." size="45"> &nbsp;&nbsp;
+        {% endif %}
+         </br>&nbsp;&nbsp;Shipping City :
+        <input type="text" id="shipping_city" name="shipping_city" value="{{ shipment.shipping_city}}" placeholder="Enter Shipping City." size="20"> &nbsp;&nbsp;
+       &nbsp;&nbsp;State :
+        <input type="text" id="shipping_state" name="shipping_state" value="{{ shipment.shipping_state}}" placeholder="Enter Shipping State." size="20"> &nbsp;&nbsp;
+          Zip Code :
+        <input type="text" id="shipping_zipcode" name="shipping_zipcode" value="{{ shipment.shipping_zipcode}}" placeholder="Enter Shipping ZipCode." size="10"> &nbsp;&nbsp;
+    &nbsp;  &nbsp;&nbsp; Country :
+        <input type="text" id="shipping_country" name="shipping_country" value="{{ shipment.shipping_country}}" placeholder="Enter Shipping Country." size="20"> &nbsp;&nbsp;
+        </br></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-outline-primary">Update Shipping Info</button>
+        </strong></h6>
+
+        </form>
+    {% endwith %}
+</div>
+
+<div class="d-print-none mt-2">
+        <div class="float-center">
+         <a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"> Save / Print</i></a>
+         <a href="{% url 'home'%}" class="btn btn-primary w-md">Home</a>
+        </div>
+</div>
+
+{% endblock %}
+

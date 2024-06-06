@@ -120,14 +120,30 @@ h2 a {
             </div>
 </header>
 <div class="container-fluid1 text-black my-1" style="border: solid black 1px">
+    <input type="hidden" id="user_type" name="user_type" value="{{ user_type }}">
+
+    {% if  user_type  == 'user' or  user_type  == 'admin' %}
     <p> <strong><h6>&nbsp;&nbsp;User : {{ shipment.shipping_full_name}}&nbsp;&nbsp; &nbsp;&nbsp;
         Email : {{ shipment.shipping_email}}&nbsp;&nbsp;&nbsp;&nbsp;Phone : {{ shipment.shipping_phone}}</h6></strong></p>
     <p> <h6><strong>&nbsp;&nbsp;Contact No. : {{ shipment.shipping_phone}}&nbsp;&nbsp; Address : {{ shipment.shipping_address1}}
         {% if shipment.shipping_address2 != None %} ,&nbsp;&nbsp;{{ shipment.shipping_address2}} {% endif %},
         &nbsp;&nbsp; </br>&nbsp;&nbsp;City : {{ shipment.shipping_city}}, &nbsp;&nbsp; State : {{ shipment.shipping_state}},
         Zip Code : {{ shipment.shipping_zipcode}},  &nbsp;&nbsp; Country : {{ shipment.shipping_country}}</strong></h6></p>
+    {% else %}
+
+    <p> <strong><h6>&nbsp;&nbsp;&nbsp;User : Guest User&nbsp;&nbsp; &nbsp;&nbsp;
+            {% for order in orders %}
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Name = {{ order.full_name}} &nbsp;&nbsp;&nbsp; Email = {{ order.email}} &nbsp;&nbsp;&nbsp; Phone = {{ order.phone}}
+            &nbsp;&nbsp;&nbsp; Invoice No. = {{ order.invoice_no}} &nbsp;&nbsp;&nbsp; Order No. = {{ order.id}}
+            {% endfor %}
+         </h6></strong></p>
+
+    {% endif %}
+
 </div>
 <div class="container-fluid1 offset-md-0" id="wrapper" style="border: solid black 2px">
+
     <table  style="width:100%" id="keywords1" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
@@ -145,13 +161,13 @@ h2 a {
     </thead>
 
         {% for order in orders %}
-
         {% for orderline in order_lines %}
         {% if orderline.order_id == order.id %}
 
+        {% if  user_type  == 'user' or  user_type  == 'admin' %}
         {% with full_name=shipment.shipping_full_name  shipping_address=order.shipping_address email=shipment.shipping_email phone=shipment.shipping_phone invoice_no=order.invoice_no  invoice_date=order.inv_date order_no=order.id totals=order.amount_paid  %}
 
-      <tr>
+        <tr>
           <td class="lalign" width="8%"><a href="{% url 'invoice' full_name shipping_address email phone invoice_no invoice_date order_no totals %}">{{ order.invoice_no}}</a></td>
         <td align="left" width="8%">{{ order.id}}</td>
         <td width="35%">{{ order.shipping_address}}</td>
@@ -168,7 +184,30 @@ h2 a {
           {% endif %}
 
        </tr>
-         {% endwith %}
+        {% endwith %}
+        {% else %}
+        {% with full_name=order.full_name  shipping_address=order.shipping_address email=order.email phone=None invoice_no=order.invoice_no  invoice_date=order.inv_date order_no=order.id totals=order.amount_paid  %}
+
+        <tr>
+          <td class="lalign" width="8%"><a href="{% url 'invoice' full_name shipping_address email phone invoice_no invoice_date order_no totals %}">{{ order.invoice_no}}</a></td>
+        <td align="left" width="8%">{{ order.id}}</td>
+        <td width="35%">{{ order.shipping_address}}</td>
+        <td width="25%">{{ orderline.product}}</td>
+        <td align="center" width="8%">{{ orderline.quantity}}</td>
+        <td width="8%">Rs.{{ orderline.price}}</td>
+        <td width="10%">Rs.{{ orderline.linetotal}}</td>
+          {% if order.shipped %}
+          <td align="center" width="5%"> <i class="bi bi-calendar2-check" style="font-size:30px;color:yellow"></i> </td>
+          <td width="15%">{{ order.ship_date }}</td>
+          {% else %}
+          <td align="center" width="5%"> <i class="bi bi-calendar-x" style="font-size:30px;color:yellow"></i> </td>
+          <td align="center" width="15%"> -- </td>
+          {% endif %}
+
+       </tr>
+        {% endwith %}
+        {% endif %}
+
          {% endif %}
         {% endfor %}
        <th colspan=9 align="right"height="20px">&nbsp;Total Invoice Amount : Rs.{{ order.amount_paid }} </th>
@@ -182,6 +221,7 @@ h2 a {
          <a href="{% url 'home'%}" class="btn btn-primary w-md">Home</a>
         </div>
      </div>
+
 </div>
 
 

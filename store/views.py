@@ -18,21 +18,29 @@ from payment.models import Order,OrderItem, ShippingAddress2
 from django.contrib.auth.models import User
 
 
-def orders(request):
-    current_user = request.user.id
+def orders(request, user_type):
+        current_user = request.user.id
 
-    shipment = ShippingAddress2.objects.get(user__id =current_user)
-    orders = Order.objects.filter(user__id =current_user ).annotate(ship_date=F('date_shipped'), inv_date=F('invoice_date'))
-    order_lines = OrderItem.objects.filter(user__id =current_user).annotate(linetotal=F('quantity') * F('price'))
+        if (user_type == 'user' or user_type == 'admin' ):
+            shipment = ShippingAddress2.objects.get(user__id =current_user)
+            orders = Order.objects.filter(user__id =current_user ).annotate(ship_date=F('date_shipped'), inv_date=F('invoice_date'))
+            order_lines = OrderItem.objects.filter(user__id =current_user).annotate(linetotal=F('quantity') * F('price'))
 
-    return render(request, "orders.html", {'shipment':shipment,'orders':orders, 'order_lines':order_lines })
+        if (user_type == 'guest'):
+            #shipment = ShippingAddress2.objects.get(user__id =None)
+            orders = Order.objects.filter(user__id =None ).annotate(ship_date=F('date_shipped'), inv_date=F('invoice_date'))
+            order_lines = OrderItem.objects.filter(user__id =None).annotate(linetotal=F('quantity') * F('price'))
+
+            return render(request, "store_orders.html", {'user_type':user_type,'orders': orders, 'order_lines': order_lines})
+
+        return render(request, "store_orders.html", {'user_type':user_type,'shipment':shipment,'orders':orders, 'order_lines':order_lines })
 
 def invoice(request, full_name, shipping_address, email, phone, invoice_no, invoice_date, order_no, totals):
     current_user = request.user.id
 
     quantities = {}
     prod_totals = {}
-    order_lines = OrderItem.objects.filter(user__id=current_user).filter(order__id=order_no).annotate(linetotal=F('quantity') * F('price'))
+    order_lines = OrderItem.objects.filter(order__id=order_no).annotate(linetotal=F('quantity') * F('price'))
     product_ids = []
     for lines in order_lines:
         product_ids.append(lines.product.pk)
@@ -51,8 +59,6 @@ def invoice(request, full_name, shipping_address, email, phone, invoice_no, invo
                   {'full_name': full_name, 'shipping_address': shipping_address, 'email': email, 'phone': phone,
                    'invoice_no': invoice_no, 'invoice_date': invoice_date,
                    'order_no': order_no, 'cart_products': products, 'quantities':quantities, 'totals': totals, 'prod_totals': prod_totals  })
-  #  , 'cart_products': None, 'quantities': None,
-  #                 'totals': None, 'prod_totals': None})
 
 def search(request):
 

@@ -52,6 +52,7 @@ h2 a {
 
 .container-fluid1 {
   width:1100px;
+
  }
 .container1 {
   width:1100px
@@ -79,7 +80,7 @@ border: 1px solid black;
     <form method="POST" action="{% url 'update_user_info' update_token %}">
         {% csrf_token %}
         <h6> <strong>&nbsp;<p>&nbsp;&nbsp; User Name :
-     <input title="User Name is not Editable." onkeydown="return false" type="text" id="username" name="username" value="{{ user.username}}" placeholder="Enter Your User name" size="20">&nbsp;&nbsp;
+     <input title="User Name is not Edxx`itable." onkeydown="return false" type="text" id="username" name="username" value="{{ user.username}}" placeholder="Enter Your User name" size="20">&nbsp;&nbsp;
       First Name :
      <input type="text" id="first_name" name="first_name" value="{{ user.first_name}}" placeholder="Enter Your First name" size="30">
      &nbsp;Last Name :

@@ -24,7 +24,7 @@ urlpatterns = [
     path('category_summary/', views.category_summary, name='category_summary'),
     path('search/', views.search, name='search'),
     path('send_mail_to_customer/', views.send_mail_to_customer, name='send_mail_to_customer'),
-    path('orders/', views.orders, name='orders'),
+    path('orders/<str:user_type>', views.orders, name='orders'),
     path('invoice/<str:full_name>/<str:shipping_address>/<str:email>/<str:phone>/<str:invoice_no>/<str:invoice_date>/<str:order_no>/<str:totals>', views.invoice, name='invoice'),
     #path('invoice/<str:invoice_no>', views.invoice, name='invoice'),
 ]

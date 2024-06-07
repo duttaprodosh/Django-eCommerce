@@ -85,35 +85,47 @@ def update_user_info(request, update_token):
         shipment = ShippingAddress2.objects.get(user__id=request.user.id)
         form = UserInfoForm(request.POST or None, instance=profile)
         shipping_form = ShippingForm(request.POST or None, instance=shipment)
+
+############   Implementing the Ajax call from user_information.html
+############   For method = 'POST' it will be Ajax Call and saving the changes in the database.
+############   After saving updated User/Profile/Shipping Info it will not reload the page.
+############   After successful/unsuccessfull form validatin and saving into dabase
+############   It will retuen a JsonRespose with appropiate message to show in the HTM alert div.
         if (request.method=='POST'):
             if update_token=='user':
                 if usr_form.is_valid():
                     usr_form.save()
                     messages.success(request, "Your User Info Has Been Updated!!")
+                    return JsonResponse({'success': True})
                 else :
                     messages.success(request, "Your User Info Has Not Been Updated!!"+json.dumps(usr_form.errors.as_data()))
+                    return JsonResponse({'success': False, 'errors': form.errors})
             if update_token == 'profile':
                 if form.is_valid():
                     form.save()
                     messages.success(request, "Your Profile Info Has Been Updated!!")
+                    return JsonResponse({'success': True})
                 else :
                     messages.success(request, "Your Profile Info Has Not Been Updated!!"+json.dumps(form.errors.as_data()))
+                    return JsonResponse({'success': False, 'errors': form.errors})
             if update_token == 'shipping':
                 if shipping_form.is_valid():
                     shipping_form.save()
                     messages.success(request, "Your Shipment Info Has Been Updated!!")
+                    return JsonResponse({'success': True})
                 else :
                     messages.success(request, "Your Shipment Info Has Not Been Updated!!"+json.dumps(shipping_form.errors.as_data()))
+                    return JsonResponse({'success': False, 'errors': form.errors})
             #if form.is_valid()  or shipping_form.is_valid():
             #    # Save original form
             #    form.save()
                 # Save shipping form
             #    shipping_form.save()
-            current_user = User.objects.get(id=request.user.id)
-            profile = Profile.objects.get(user__id=request.user.id)
-            shipment = ShippingAddress2.objects.get(user__id=request.user.id)
+            #current_user = User.objects.get(id=request.user.id)
+            #profile = Profile.objects.get(user__id=request.user.id)
+            #shipment = ShippingAddress2.objects.get(user__id=request.user.id)
 
-            return render(request, "user_information.html", {'user':current_user, 'profile':profile, 'shipment':shipment})
+            #return render(request, "user_information.html", {'user':current_user, 'profile':profile, 'shipment':shipment})
         else :
             return render(request, "user_information.html", {'profile':profile, 'shipment':shipment})
     else:

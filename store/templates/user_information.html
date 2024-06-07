@@ -75,9 +75,12 @@ border: 1px solid black;
                 </div>
             </div>
 </header>
+<div id="alert" style="display:none;"></div>
+
 <div class="container-fluid1 text-black my-1" style="border: solid black 1px;">
     {% with update_token='user' %}
-    <form method="POST" action="{% url 'update_user_info' update_token %}">
+    <!--<form method="POST" action="{% url 'update_user_info' update_token %}">  -->
+    <form id="user-form" method="post">
         {% csrf_token %}
         <h6> <strong>&nbsp;<p>&nbsp;&nbsp; User Name :
      <input title="User Name is not Edxx`itable." onkeydown="return false" type="text" id="username" name="username" value="{{ user.username}}" placeholder="Enter Your User name" size="20">&nbsp;&nbsp;
@@ -92,7 +95,8 @@ border: 1px solid black;
     </form>
     {% endwith  %}
     {% with update_token='profile' %}
-    <form method="POST" action="{% url 'update_user_info' update_token %}">
+  <!--  <form method="POST" action="{% url 'update_user_info' update_token %}">  -->
+    <form id="profile-form" method="post">
         {% csrf_token %}
        <hr> &nbsp;<h6><strong>&nbsp;
        User Profile Phone :
@@ -115,7 +119,8 @@ border: 1px solid black;
     </form>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     {% endwith  %}
     {% with update_token='shipping' %}
-        <form method="POST" action="{% url 'update_user_info' update_token %}">
+    <!--    <form method="POST" action="{% url 'update_user_info' update_token %}">  -->
+    <form id="shipping-form" method="post">
         {% csrf_token %}
         <hr><h6><strong>&nbsp; Shipping Name :
         <input type="text" id="shipping_full_name" name="shipping_full_name" value="{{ shipment.shipping_full_name}}" placeholder="Enter Shipping Full name." size="25"> &nbsp;&nbsp;
@@ -151,5 +156,67 @@ border: 1px solid black;
         </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(function() {
+    $('#user-form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "update_user_info" "user" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (response.success) {
+            $('#user-form').hide();
+            $('#alert').html('<div class="alert alert-success text-black"><strong>Your User Info Has Been Updated!! User Info - Input form being not visible now.</strong></div>').show();
+          } else {
+            $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
+          }
+        }
+      });
+    });
+  });
+
+  $(function() {
+    $('#profile-form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "update_user_info" "profile" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (response.success) {
+            $('#profile-form').hide();
+            $('#alert').html('<div class="alert alert-success text-black"><strong>Your Profile Info Has Been Updated!! Profile Info - Input form being not visible now.</strong></div>').show();
+          } else {
+            $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
+          }
+        }
+      });
+    });
+  });
+
+  $(function() {
+    $('#shipping-form').on('submit', function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: '{% url "update_user_info" "shipping" %}',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (response.success) {
+            $('#shipping-form').hide();
+            $('#alert').html('<div class="alert alert-success text-black"><strong>Your Shipping Info Has Been Updated!! Shipping Info - Input form being not visible now. </strong></div>').show();
+          } else {
+            $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
+          }
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}
 

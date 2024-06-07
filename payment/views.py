@@ -143,7 +143,7 @@ def billing_info(request):
         # Create a session with Shipping Info
         my_shipping = request.POST
         request.session['my_shipping'] = my_shipping
-
+        #request.session.set_expiry(300)
         # Check to see if user is logged in
         if request.user.is_authenticated:
             # Get The Billing Form

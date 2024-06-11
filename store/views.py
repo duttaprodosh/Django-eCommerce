@@ -351,6 +351,7 @@ def update_user(request):
         return redirect('home')
 
 def update_password(request):
+    
     if request.user.is_authenticated:
         current_user = request.user
         # Did they fill out the form

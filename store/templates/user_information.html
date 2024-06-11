@@ -75,7 +75,9 @@ border: 1px solid black;
                 </div>
             </div>
 </header>
-<div id="alert" style="display:none;"></div>
+<div id="alert" class="container1 bg-dark text-white" style="display:none;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+</div>
 
 <div class="container-fluid1 text-black my-1" style="border: solid black 1px;">
     {% with update_token='user' %}
@@ -169,7 +171,7 @@ border: 1px solid black;
         success: function(response) {
           if (response.success) {
             $('#user-form').hide();
-            $('#alert').html('<div class="alert alert-success text-black"><strong>Your User Info Has Been Updated!! User Info - Input form being not visible now.</strong></div>').show();
+            $('#alert').html('<div class="alert alert-primary text-black alert-dismissible fade show" role="alert"> <strong>Your User Info Has Been Updated!! User Info - Input form being not visible now.</strong> </div>').show();
           } else {
             $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
           }
@@ -189,7 +191,7 @@ border: 1px solid black;
         success: function(response) {
           if (response.success) {
             $('#profile-form').hide();
-            $('#alert').html('<div class="alert alert-success text-black"><strong>Your Profile Info Has Been Updated!! Profile Info - Input form being not visible now.</strong></div>').show();
+            $('#alert').html('<div class="alert alert-primary text-black"><strong>Your Profile Info Has Been Updated!! Profile Info - Input form being not visible now.</strong></div>').show();
           } else {
             $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
           }
@@ -209,7 +211,7 @@ border: 1px solid black;
         success: function(response) {
           if (response.success) {
             $('#shipping-form').hide();
-            $('#alert').html('<div class="alert alert-success text-black"><strong>Your Shipping Info Has Been Updated!! Shipping Info - Input form being not visible now. </strong></div>').show();
+            $('#alert').html('<div class="alert alert-primary text-black"><strong>Your Shipping Info Has Been Updated!! Shipping Info - Input form being not visible now. </strong></div>').show();
           } else {
             $('#alert').html('<div class="alert alert-danger text-black">' + response.errors + '</div>').show();
           }

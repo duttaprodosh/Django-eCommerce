@@ -350,9 +350,109 @@ def update_user(request):
         messages.success(request, "You Must Be Logged In To Access That Page!!")
         return redirect('home')
 
+import uuid
+def forget_password(request):
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+
+            user = User.objects.filter(username=username).first()
+            if user == None:
+                messages.success(request, "User Not Found !!")
+                return redirect('/forget_password')
+
+            user_profile = Profile.objects.filter(user__id=user.id).first()
+
+            #if user.first_name != None and user.last_name != None:
+            #    full_name = "{} {}".format(user.first_name, user.last_name)
+            #    full_name =  user.first_name+'  '+user.last_name
+            #elif  user.last_name == None:
+            full_name = user.first_name
+            token = str(uuid.uuid4())
+            subject = "Your Forget Password Link."
+            reset_link = 'http://127.0.0.1:8000/update_password/'
+            reset_email_link = 'http://127.0.0.1:8000/update_password_emaillink/'+str(user.id)+'/'+token+'/'
+
+            user_profile.forget_password_token=token
+            user_profile.save()
+
+            html_content = get_template('forgetPass.html').render(
+                {'user':user,'full_name': full_name, 'email': user.email, 'link':reset_email_link, 'user_id':str(user.id), 'token':token})
+
+            send_mail_to_client(user=None,full_name=full_name, email=user.email, phone=user_profile.phone, shipping_address=None, amount_paid=None,html_content=html_content)
+
+            return render(request, "forgetPass.html", {'user':user,'full_name': full_name, 'email': user.email, 'phone': user_profile.phone, 'link':reset_link, 'user_id':str(user.id), 'token':token})
+            #return True
+        else :
+            return render(request, "forget_password.html")
+    except Exception as e:
+        print(e)
+        return redirect("home")
+
+def update_password_emaillink(request,userid,token):
+    try :
+
+        current_user = User.objects.get(pk=userid)
+        db_token = Profile.objects.filter(user__id=userid).first().forget_password_token
+
+        if db_token == token :
+            if request.method == 'GET':
+                form = ChangePasswordForm(current_user)
+                return render(request, "update_password.html", {'form': form, 'token': token, 'userid': userid, 'user':current_user})
+            else :
+                return redirect('home')
+        else:
+                messages.success(request,'User Token is not matching with the User Profile Token.....')
+                return redirect('home')
+    except Exception as e:
+        print(e)
+        messages.error(request,e)
+        return redirect('home')
+
 def update_password(request):
-    
-    if request.user.is_authenticated:
+
+###################    Reset of Password without Logged in User
+###################    By Username, User are requested to click
+###################    on the Reset Password Link forwarded to his/her's Email Id
+    if request.method == 'POST':
+        token = request.POST.get('token')
+        user_id = request.POST.get('user_id')
+        if user_id != None :
+            db_token = Profile.objects.filter(user__id=user_id).first().forget_password_token
+            user_id_reset = user_id
+            current_user_reset = request.user
+            request.session['user_id_reset'] = user_id_reset
+            #request.session['current_user_reset'] = current_user_reset
+            if token == db_token :
+                request.session['token'] = token
+                request.session['db_token'] = db_token
+
+
+        #current_user_reset = request.session.get('current_user_reset')
+        user_id_reset = request.session.get('user_id_reset')
+        token = request.session.get('token')
+        db_token = request.session.get('db_token')
+
+        if user_id_reset != None or token == db_token:
+            current_user = User.objects.get(pk=user_id_reset)
+            form = ChangePasswordForm(current_user, request.POST)
+
+            if form.is_valid():
+                form.save()
+                current_user.password = request.POST.get('new_password1')
+                #current_user.save()
+                messages.success(request, "Your Password Has Been Updated...Please Log-In with Your New Password. ")
+                login(request, current_user)
+                return redirect('home')
+            else:
+                for error in list(form.errors.values()):
+                    messages.error(request, error)
+
+            return render(request, "update_password.html", {'form': form})
+################ End of Password Reset without User Login  ########################
+
+##########  Password Reset Once user has been authenticated by his Login credential ##########
+    if (request.user.is_authenticated):
         current_user = request.user
         # Did they fill out the form
         if request.method  == 'POST':

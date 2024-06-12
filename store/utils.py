@@ -6,6 +6,10 @@ import socket
 
 def send_mail_to_client(user, full_name, email, phone, shipping_address, amount_paid,html_content):
     socket.getaddrinfo('127.0.0.1', 8000)
+    if shipping_address== None :
+        shipping_address=' '
+    if amount_paid == None :
+        amount_paid = 0
     subject = 'Mail from Python djangoECommerce application.'
     message = "Hi "+full_name+", "+"""
     \n\tHow Are you ? Thanks for shopping in the Django EComm site.

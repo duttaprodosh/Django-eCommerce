@@ -414,9 +414,10 @@ def update_password(request):
 ###################    Reset of Password without Logged in User
 ###################    By Username, User are requested to click
 ###################    on the Reset Password Link forwarded to his/her's Email Id
-    if request.method == 'POST':
+    if request.method == 'POST' and not(request.user.is_authenticated):
         token = request.POST.get('token')
         user_id = request.POST.get('user_id')
+        print('User Id :'+str(user_id))
         if user_id != None :
             db_token = Profile.objects.filter(user__id=user_id).first().forget_password_token
             user_id_reset = user_id
